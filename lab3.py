@@ -18,14 +18,19 @@ def itemValue():
     return itemVal
 # Declare the redeuced by module to calculate the sum of the markdowns
 def redeucedby(x,y):
-    sum = int(x - y)
+    sum = x - y
     return sum
 
 # declare the lossPercent() which will take the shipmentValue and 
 # markdownAmount as arguments to conver the loss to a percentage
 
 def lossPercent(a,b):
-    perHundred = (b/a) * 100
+    # When calculating percent we know the maths is
+    # x/y = (y/x) * 100
+    # This module will not do the multiplication - it will only do the division
+    # as the main module will format this output and the format('%') function will
+    # actually perform the multiplication when it formats the floating point number
+    perHundred = (b/a)
     return perHundred
 
 # declare the lossAlert()
@@ -34,10 +39,12 @@ def lossPercent(a,b):
 
 def lossAlert(z):
     print(' ')
-    if z in range(30,100):
+    if z > 100:
         print('High losses reported, please review order flow ')
+    elif z > 30:
+        print('Please don\'t order anymore')
     else:
-        print('Low losses reported. Please track sales on items ')
+        print('Low losses reported. Please track sales on items ', sep = '')
         print('to determine if you should keep them on hand ')
     return z
 
@@ -47,11 +54,11 @@ def lossAlert(z):
 def main():
     shipmentValue = getValue()
     itemCost = itemValue()
-    markdownAmount = int(redeucedby(shipmentValue,itemCost))
-    markdownPercentage = lossPercent(shipmentValue,markdownAmount)
-    message = lossAlert(markdownPercentage)
+    markdownAmount = redeucedby(shipmentValue,itemCost)
+    markdownPercentage = lossPercent(shipmentValue,itemCost)
+    message = lossAlert(itemCost)
     print(' ')
-    print('You spent: $', shipmentValue)
-    print('You did a total markdown for: $',itemCost)
-    print('Which is:',int(markdownPercentage),'%')
+    print('You spent: $', format(shipmentValue, ',.2f'),sep='')
+    print('You did a total markdown for: $',format(itemCost, ',.2f'), sep='')
+    print('Which is: ', format(markdownPercentage, '.1%'), sep='')
 main()
