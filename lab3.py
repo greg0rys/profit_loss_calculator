@@ -28,6 +28,20 @@ def lossPercent(a,b):
     perHundred = (b/a) * 100
     return perHundred
 
+# declare the lossAlert()
+# Which uses a decision structure to decide which message to output
+# which takes markdownPercentage as an argument
+
+def lossAlert(z):
+    print(' ')
+    if z in range(30,100):
+        print('High losses reported, please review order flow ')
+    else:
+        print('Low losses reported. Please track sales on items ')
+        print('to determine if you should keep them on hand ')
+    return z
+
+
 # declare the main()
 
 def main():
@@ -35,6 +49,8 @@ def main():
     itemCost = itemValue()
     markdownAmount = int(redeucedby(shipmentValue,itemCost))
     markdownPercentage = lossPercent(shipmentValue,markdownAmount)
+    message = lossAlert(markdownPercentage)
+    print(' ')
     print('You spent: $', shipmentValue)
     print('You did a total markdown for: $',itemCost)
     print('Which is:',int(markdownPercentage),'%')
