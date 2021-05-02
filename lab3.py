@@ -44,8 +44,8 @@ def lossAlert(z):
     elif z > 30:
         print('Please don\'t order anymore')
     else:
-        print('Low losses reported. Please track sales on items ', sep = '')
-        print('to determine if you should keep them on hand ')
+        print(' Low losses reported. \n Please track sales on items ',sep = '')
+        print(' to determine if you should keep them on hand ')
     return z
 
 
