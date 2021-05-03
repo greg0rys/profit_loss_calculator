@@ -1,7 +1,22 @@
+# define newUserMsg() which will ask the user if this is their first time launching this program
+# it will then use an if statement to determine if it should outprint what it does
+# to the user
+def newUserMsg():
+    msg = input('Is this your first time using this program? Enter y/n ')
+    print(" ")
+    if msg == 'y':
+        print('Welcome to your first run')
+        print('I will ask you for your invoice total, number of markdowns, and the value to reduce by')
+        print('I will then calculate your loss in dollars and percent')
+        print('and advise you if you should reorder them or not')
+        print('   ')
+    else:
+        print('Please begin entering your values')
+        print(' ')
 # define the getValue() module 
 # Which will get the total of the invoice from the user
 def getValue():
-    purchaseValue = float(input('Please enter the invoice total: '))
+    purchaseValue = float(input('Please enter the invoice total: $'))
     return purchaseValue
 
 #define the itemValue module
@@ -9,11 +24,11 @@ def getValue():
 # and return their total 
 def itemValue():
     itemVal = 0.00
-    numItems = int(input('How many items would you like to markdown?'))
+    numItems = int(input('How many items would you like to markdown? '))
 
     #Run a for loop controled by the input of numItems
     for counter in range(1,numItems + 1):
-        cost = float(input('Please enter the items cost: $'))   
+        cost = float(input('amount off item ' + str(counter) +' $'))   
         itemVal = itemVal + cost
     return itemVal
 # Declare the redeuced by module to calculate the sum of the markdowns
@@ -40,18 +55,20 @@ def lossPercent(a,b):
 def lossAlert(z):
     print(' ')
     if z > 100:
-        print('High losses reported, please review order flow ')
+        print(' High losses reported, please review order flow ')
     elif z > 30:
-        print('Please don\'t order anymore')
+        print(' Please don\'t order anymore ')
     else:
         print(' Low losses reported. \n Please track sales on items ',sep = '')
         print(' to determine if you should keep them on hand ')
     return z
 
 
+
 # declare the main()
 
 def main():
+    firstRun = newUserMsg()
     shipmentValue = getValue()
     itemCost = itemValue()
     markdownAmount = redeucedby(shipmentValue,itemCost)
